@@ -1,0 +1,31 @@
+/* Enter your custom styles here */
+.znone {
+    display: none;
+    visibility: hidden;
+
+}
+.zSerialNo{
+    margin-top: 1rem;
+}
+.formNoTitle h6 {
+    display: none;
+    visibility: hidden;
+}
+
+.zspace {
+    margin-right: 1rem;
+}
+
+.formNoTitle h4 {
+    font-weight: bold;
+}
+
+.formNoTitle h5 {
+    display: none;
+    visibility: hidden;
+
+}
+
+.zspacerem {
+    margin-top: -1.5rem;
+}

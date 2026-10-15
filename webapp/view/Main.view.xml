@@ -1,0 +1,263 @@
+<mvc:View controllerName="zbreeder.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <App id="app">
+    <Page id="page" title="{i18n>title}">
+    <IconTabBar
+    id="idIconTabBar"
+    select=".onTabSelect">
+
+    <items>
+
+        <IconTabFilter
+            key="Planning"
+            text="Planning" >
+            <f:SimpleForm title=""
+            editable="true"
+            layout="ResponsiveGridLayout"
+            labelSpanXL="12"
+            labelSpanL="12"
+            labelSpanM="12"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="0"
+            emptySpanL="0"
+            emptySpanM="0"
+            emptySpanS="0"
+            columnsXL="5"
+            columnsL="5"
+            columnsM="5"
+            singleContainerFullSize="false"
+            class="formNoTitle zspacerem"
+        >
+            <f:content>
+                <core:Title text="test" />
+				<Label text="Plant" />
+                <Input id="idplant" value="{localModel>/Plant}" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" />
+
+			    <core:Title text="test" />
+                <Label text="Description"></Label>
+				<Text text="{localModel>/PlantDesc}" wrapping="true"/>
+
+				<core:Title text="test" />
+                <Label text="Processes"></Label>                 
+                <Input
+                    value="{localModel>/Process}"
+                    showValueHelp="true"
+                    valueHelpRequest=".onValueHelpRequest"/>
+
+                <core:Title text="test" />
+                <Label text="Description"></Label>
+				<Text text="{localModel>/ProcessDesc}" wrapping="true"/>
+    
+            <core:Title text="test" />
+            <Label text=""></Label>
+            <Button  text="Go" press="ongo" class="zSerialNo"></Button>
+            </f:content>			
+        </f:SimpleForm>
+
+    <f:SimpleForm title=""
+            editable="true"
+            layout="ResponsiveGridLayout"
+            labelSpanXL="12"
+            labelSpanL="12"
+            labelSpanM="12"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="0"
+            emptySpanL="0"
+            emptySpanM="0"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            singleContainerFullSize="false"
+            class="formNoTitle zspacerem"
+        >
+            <f:content>
+                <core:Title text="test" />
+				
+            <Table id="itemtable" items="{path:'doc>/results',templateShareable: false}"
+                mode="MultiSelect"
+                >
+                 <headerToolbar>
+				<OverflowToolbar style="Clear">
+                <Text text="DOC Receiving Area"></Text>
+                <ToolbarSpacer />						
+							<Button text="Create" press="onCreate" type="Emphasized"  />
+                            <Button text="Get Orders" press="onGetOrders" type="Emphasized"  />
+					</OverflowToolbar>	</headerToolbar>
+                    <columns>
+
+                        <Column >
+                            <Text text="Cleaning Material" wrapping="true" />
+                        </Column>
+						 <Column  >
+                            <Text text="Production Version"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="Order Type"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="Total Quantity"  wrapping="true" />
+                        </Column>
+                         <Column   >
+                            <Text text="UOM"  wrapping="true" />
+                        </Column>
+                         <Column   >
+                            <Text text="Start Date"  wrapping="true" />
+                        </Column>
+						 <Column   >
+                            <Text text="End Date"  wrapping="true" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+						 <Text text="{doc>Matnr}" />
+						  <Text text="{doc>Verid}" />
+                          <Text text="{doc>Auart}" />
+						  <Input value='{doc>Gamng}' />
+                          <Text text="{doc>Gmein}" />
+                          <DatePicker  
+                                value="{
+                                path: 'doc>Gstrp',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'dd.MM.yyyy'
+                                }
+                            }"/>
+                            <Text text="{
+                                path: 'doc>Gltrp',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'dd.MM.yyyy'
+                                }
+                            }" />
+                        
+                   </ColumnListItem>
+                    </items>
+                </Table>
+
+			    <core:Title text="test" />
+				 <Table id="itemtable1" items="{path:'planning>/results',templateShareable: false}"
+                >
+                 <headerToolbar>
+				<OverflowToolbar style="Clear">
+                <Text text="Production Orders Created"></Text>
+                <ToolbarSpacer />						
+							<Button text="Operations" press="onOperations" type="Emphasized"  />
+				<Button text="Release" press="onRelease" type="Emphasized"  />
+					</OverflowToolbar>	</headerToolbar>
+                    <columns>
+
+                        <Column >
+                            <Text text="PP Order" wrapping="true" />
+                        </Column>
+                        <Column  >
+                            <Text text="Order Description"  wrapping="true" />
+                        </Column>
+						 <Column  >
+                            <Text text="Plant"  wrapping="true" />
+                        </Column>
+                        <!-- <Column   >
+                            <Text text="House/workcenter"  wrapping="true" />
+                        </Column> -->
+						<Column  >
+                            <Text text="Material"  wrapping="true" />
+                        </Column>
+                        <Column  >
+                            <Text text="Material Description"  wrapping="true" />
+                        </Column>
+                        <Column  >
+                            <Text text="Quantity"  wrapping="true" />
+                        </Column>
+                        <Column  >
+                            <Text text="UOM"  wrapping="true" />
+                        </Column>
+                         <Column   >
+                            <Text text="Start Date"  wrapping="true" />
+                        </Column>
+						 <Column   >
+                            <Text text="End Date"  wrapping="true" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+						 <Text text="{planning>Aufnr}" />
+						   <Text text='{planning>Ktext}' />
+						   <Text text='{planning>Werks}' />
+                           <Text text='{planning>Matnr}' />
+                           <Text text='{planning>Matxt}' />
+                           <Text text='{planning>Gamng}' />
+                           <Text text='{planning>Gmein}' />
+                            <Text text="{
+                                path: 'planning>Gstrp',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'dd.MM.yyyy'
+                                }
+                            }"/>
+                            <Text text="{
+                                path: 'planning>Gltrp',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'dd.MM.yyyy'
+                                }
+                            }" />
+                   </ColumnListItem>
+                    </items>
+                </Table>
+
+				<core:Title text="test" />
+		      <Table id="itemtable2" items="{path:'item>/results',templateShareable: false}"
+                >
+                 <headerToolbar>
+				<OverflowToolbar style="Clear">
+                <Text text="Operations for selected Orders"></Text>
+                <ToolbarSpacer />						
+							<!-- <Button text="Operations" press="onOperations" type="Emphasized"  /> -->
+				
+					</OverflowToolbar>	</headerToolbar>
+                    <columns>
+
+                        <!-- <Column >
+                            <Text text="PP Order" wrapping="true" />
+                        </Column>
+						 <Column  >
+                            <Text text="Expiry Date"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="Quantity"  wrapping="true" />
+                        </Column> -->
+						
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+						 <!-- <Input value="{item>Matnr}" />
+						   <Input value='{item>werks}' />
+						   <Input value='{item>menge}' /> -->
+               
+                   </ColumnListItem>
+                    </items>
+                </Table>
+            </f:content>			
+        </f:SimpleForm>
+
+
+        </IconTabFilter>
+
+        <IconTabFilter
+            key="Operation"
+            text="Operation" >
+        </IconTabFilter>
+
+       
+    </items>
+</IconTabBar>
+    </Page>
+    </App>
+</mvc:View>
