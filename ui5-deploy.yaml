@@ -20,7 +20,7 @@ builder:
         app:
           name: ZBREEDER
           description: Breeder
-          package: ZBP
+          package: ZFIORIDEV
           transport: DS4K901372
         exclude:
           - /test/

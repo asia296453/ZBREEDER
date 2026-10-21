@@ -7,6 +7,7 @@ sap.ui.define([
 
     return Controller.extend("zbreeder.controller.Main", {
         onInit: function () {
+            
 
             var sLocalModel = {
                 Plant: "",
@@ -58,8 +59,11 @@ sap.ui.define([
             debugger;
             if (opayload !== "") {
                 this.getView().getModel().create("/BREORDSet", opayload, {
-                    success: function (oData) {
+                    success: function (oData,res) {
                         debugger;
+                        if(res.headers["sap-message"] !== ""){
+                            MessageBox.error(JSON.parse(res.headers["sap-message"]).message);
+                        }
                         var oarr = [];
                         oarr.push(oData);
                         this.getModel("planning").setProperty("/results",oarr);
@@ -71,6 +75,30 @@ sap.ui.define([
             }
         },
 
+
+onOperations: function () {
+
+    var oTable = this.byId("itemtable1");
+    var aSelectedItems = oTable.getSelectedItems();
+
+    if (aSelectedItems.length === 0) {
+        sap.m.MessageToast.show("Please select one Production Order");
+        return;
+    }
+
+    var oPlanning = aSelectedItems[0]
+        .getBindingContext("planning")
+        .getObject();
+
+    console.log(oPlanning);
+
+    var opayload = {};
+
+    opayload.Aufnr = oPlanning.Aufnr;
+
+    console.log(opayload);
+
+},
         onGetOrders: function (oEvent) {
             var oTable = this.byId("itemtable");
             var aSelectedItems = oTable.getSelectedItems();

@@ -143,8 +143,10 @@
                 </Table>
 
 			    <core:Title text="test" />
+                
 				 <Table id="itemtable1" items="{path:'planning>/results',templateShareable: false}"
-                >
+                 mode="MultiSelect"
+                 includeItemInSelection="true">
                  <headerToolbar>
 				<OverflowToolbar style="Clear">
                 <Text text="Production Orders Created"></Text>

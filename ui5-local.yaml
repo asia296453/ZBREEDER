@@ -32,7 +32,7 @@ server:
         backend:
           - path: /sap
             url: http://sapdev.sap.tanmiah.com:443
-            destination: DS4-100
+            destination: DS4-110
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
