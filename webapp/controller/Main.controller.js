@@ -7,7 +7,7 @@ sap.ui.define([
 
     return Controller.extend("zbreeder.controller.Main", {
         onInit: function () {
-            
+
 
             var sLocalModel = {
                 Plant: "",
@@ -42,7 +42,7 @@ sap.ui.define([
 
             aSelectedItems.forEach(function (oItem) {
                 var odoc = oItem.getBindingContext("doc").getObject();
-                    opayload.Verid = odoc.Verid,
+                opayload.Verid = odoc.Verid,
                     opayload.Aufnr = "",
                     opayload.Sttxt = "CRT",
                     opayload.Werks = olocal.Plant,
@@ -56,17 +56,17 @@ sap.ui.define([
                     opayload.Gstrp = odoc.Gstrp,//\/Date(1789516800000)\/,
                     opayload.Gltrp = odoc.Gltrp// "\/Date(1794268800000)\/
             });
-            debugger;
             if (opayload !== "") {
                 this.getView().getModel().create("/BREORDSet", opayload, {
-                    success: function (oData,res) {
-                        debugger;
-                        if(res.headers["sap-message"] !== ""){
+                    success: function (oData, res) {
+
+                        if (res.headers["sap-message"] !== undefined &&
+                            JSON.parse(res.headers["sap-message"]).message !== "") {
                             MessageBox.error(JSON.parse(res.headers["sap-message"]).message);
                         }
                         var oarr = [];
                         oarr.push(oData);
-                        this.getModel("planning").setProperty("/results",oarr);
+                        this.getModel("planning").setProperty("/results", oarr);
                     }.bind(this),
                     error: function (oError) {
                         console.error(oError);
@@ -75,30 +75,122 @@ sap.ui.define([
             }
         },
 
+        ongetOperations: function () {
+            var oTable = this.byId("itemtable1");
+            var aSelectedItems = oTable.getSelectedItems();
 
-onOperations: function () {
+            if (aSelectedItems.length === 0) {
+                sap.m.MessageToast.show("Please select one Production Order");
+                return;
+            }
 
-    var oTable = this.byId("itemtable1");
-    var aSelectedItems = oTable.getSelectedItems();
+            var oPlanning = aSelectedItems[0].getBindingContext("planning").getObject();
+            var sAufnr = oPlanning.Aufnr;
+            var ofilter = [];
+            ofilter.push(new sap.ui.model.Filter("Aufnr", sap.ui.model.FilterOperator.EQ, sAufnr));
 
-    if (aSelectedItems.length === 0) {
-        sap.m.MessageToast.show("Please select one Production Order");
-        return;
-    }
+            this.onReadOData("/BREOPRSet", ofilter, "operations").then((oresponse) => {
+                if (oresponse.length === 0) {
+                    sap.m.MessageToast.show("No Orders found");
+                    return;
+                }
+            });
+        },
+        onOperations: function () {
 
-    var oPlanning = aSelectedItems[0]
-        .getBindingContext("planning")
-        .getObject();
+            var oTable = this.byId("itemtable1");
+            var aSelectedItems = oTable.getSelectedItems();
 
-    console.log(oPlanning);
+            if (aSelectedItems.length === 0) {
+                sap.m.MessageToast.show("Please select one Production Order");
+                return;
+            }
 
-    var opayload = {};
+            var oPlanning = aSelectedItems[0]
+                .getBindingContext("planning")
+                .getObject();
 
-    opayload.Aufnr = oPlanning.Aufnr;
+            console.log(oPlanning);
 
-    console.log(opayload);
+            var opayload = {
+                Aufnr: oPlanning.Aufnr
 
-},
+
+            };
+
+            console.log(opayload);
+
+            this.getView().getModel().create("/BREOPRSet", opayload, {
+
+                success: function (oData, response) {
+
+                    console.log("SUCCESS");
+
+                    console.log(oData);
+
+                    console.log(response);
+
+                }.bind(this),
+
+                error: function (oError) {
+
+                    console.log("ERROR");
+
+                    console.log(oError);
+
+                }.bind(this)
+
+
+            });
+            console.log(oPlanning);
+
+        },
+
+        onRelease: function () {
+
+            var oTable = this.byId("itemtable1");
+            var aSelectedItems = oTable.getSelectedItems();
+
+            if (aSelectedItems.length === 0) {
+                sap.m.MessageToast.show("Please select one Production Order");
+                return;
+            }
+
+            var oPlanning = aSelectedItems[0]
+                .getBindingContext("planning")
+                .getObject();
+
+            console.log(oPlanning);
+
+            var opayload = {
+                Aufnr: oPlanning.Aufnr
+
+            };
+
+            console.log(opayload);
+
+            this.getView().getModel().create("/BREOPRSet", opayload, {
+
+                success: function (oData, response) {
+
+                    console.log("SUCCESS");
+                    console.log(oData);
+
+                    sap.m.MessageToast.show("Released Successfully");
+
+                }.bind(this),
+
+                error: function (oError) {
+
+                    console.log("ERROR");
+                    console.log(oError);
+
+                }.bind(this)
+
+            });
+
+        },
+
         onGetOrders: function (oEvent) {
             var oTable = this.byId("itemtable");
             var aSelectedItems = oTable.getSelectedItems();

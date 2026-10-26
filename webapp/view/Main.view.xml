@@ -151,7 +151,7 @@
 				<OverflowToolbar style="Clear">
                 <Text text="Production Orders Created"></Text>
                 <ToolbarSpacer />						
-							<Button text="Operations" press="onOperations" type="Emphasized"  />
+							<Button text="Operations" press="ongetOperations" type="Emphasized"  />
 				<Button text="Release" press="onRelease" type="Emphasized"  />
 					</OverflowToolbar>	</headerToolbar>
                     <columns>
@@ -215,7 +215,7 @@
                 </Table>
 
 				<core:Title text="test" />
-		      <Table id="itemtable2" items="{path:'item>/results',templateShareable: false}"
+		      <Table id="itemtable2" items="{path:'operations>/results',templateShareable: false}"
                 >
                  <headerToolbar>
 				<OverflowToolbar style="Clear">
@@ -226,23 +226,61 @@
 					</OverflowToolbar>	</headerToolbar>
                     <columns>
 
-                        <!-- <Column >
+                        <Column >
                             <Text text="PP Order" wrapping="true" />
                         </Column>
 						 <Column  >
-                            <Text text="Expiry Date"  wrapping="true" />
+                            <Text text="Activity"  wrapping="true" />
                         </Column>
                         <Column   >
-                            <Text text="Quantity"  wrapping="true" />
-                        </Column> -->
-						
+                            <Text text="Op. Short Text"  wrapping="true" />
+                        </Column>
+						<Column   >
+                            <Text text="Work Center"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="Meinh"  wrapping="true" />
+                        </Column>
+                         <Column   >
+                            <Text text="Unit of Measure"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="Meinh"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="Execution Start Date"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="Execution End Date"  wrapping="true" />
+                        </Column>
+                        <Column   >
+                            <Text text="System Status"  wrapping="true" />
+                        </Column>
                     </columns>
                     <items>
                         <ColumnListItem>
-						 <!-- <Input value="{item>Matnr}" />
-						   <Input value='{item>werks}' />
-						   <Input value='{item>menge}' /> -->
-               
+						 <Text text="{operations>Aufnr}" />
+						   <Text text='{operations>Vornr}' />
+						   <Text text='{operations>Ltxa1}' />
+                           <Text text='{operations>Arbpl}' />
+                           <Text text='{operations>Mgvrg}' />
+                           <Text text='{operations>Meinh}' />
+                           <Text text='{operations>Lmnga}' />
+                           <Text text="{
+                                path: 'operations>Isdd',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'dd.MM.yyyy'
+                                }
+                            }"/>
+                            <Text text="{
+                                path: 'operations>Iedd',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'dd.MM.yyyy'
+                                }
+                            }"/>
+                           <Text text='{operations>Vsttxt}' />
                    </ColumnListItem>
                     </items>
                 </Table>
