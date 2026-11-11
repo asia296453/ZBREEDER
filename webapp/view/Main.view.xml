@@ -35,26 +35,26 @@
             class="formNoTitle zspacerem"
         >
             <f:content>
-                <core:Title text="test" />
+                <core:Title text="" />
 				<Label text="Plant" />
                 <Input id="idplant" value="{localModel>/Plant}" showValueHelp="true" valueHelpRequest=".onValueHelpRequest" />
 
-			    <core:Title text="test" />
+			    <core:Title text="" />
                 <Label text="Description"></Label>
 				<Text text="{localModel>/PlantDesc}" wrapping="true"/>
 
-				<core:Title text="test" />
+				<core:Title text="" />
                 <Label text="Processes"></Label>                 
                 <Input
                     value="{localModel>/Process}"
                     showValueHelp="true"
                     valueHelpRequest=".onValueHelpRequest"/>
 
-                <core:Title text="test" />
+                <core:Title text="" />
                 <Label text="Description"></Label>
 				<Text text="{localModel>/ProcessDesc}" wrapping="true"/>
     
-            <core:Title text="test" />
+            <core:Title text="" />
             <Label text=""></Label>
             <Button  text="Go" press="ongo" class="zSerialNo"></Button>
             </f:content>			
@@ -79,7 +79,7 @@
             class="formNoTitle zspacerem"
         >
             <f:content>
-                <core:Title text="test" />
+                <core:Title text="" />
 				
             <Table id="itemtable" items="{path:'doc>/results',templateShareable: false}"
                 mode="MultiSelect"
@@ -142,7 +142,7 @@
                     </items>
                 </Table>
 
-			    <core:Title text="test" />
+			    <core:Title text="" />
                 
 				 <Table id="itemtable1" items="{path:'planning>/results',templateShareable: false}"
                  mode="MultiSelect"
@@ -214,7 +214,7 @@
                     </items>
                 </Table>
 
-				<core:Title text="test" />
+				<core:Title text="" />
 		      <Table id="itemtable2" items="{path:'operations>/results',templateShareable: false}"
                 >
                  <headerToolbar>
